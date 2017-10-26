@@ -12,11 +12,10 @@ import tensorflow as tf
 from tempfile import TemporaryFile
 import math
 
-PathDicom="C:/Users/Parisa/Documents/DeepMindSegmenatationProject/Copy of train/train/DOI"
-Pathnrrd = "C:/Users/Parisa/Documents/DeepMindSegmenatationProject/Copy of train"
-#Pathoutput="C:/Users/Parisa/Documents/DeepMindSegmenatationProject/t"
-PathDicomTest="C:/Users/Parisa/Documents/DeepMindSegmenatationProject/Copy of test/test/DOI"
-PathnrrdTest="C:/Users/Parisa/Documents/DeepMindSegmenatationProject/Copy of test"
+PathDicom="./Copy of train/train/DOI"
+Pathnrrd = "./Copy of train"
+PathDicomTest="./Copy of test/test/DOI"
+PathnrrdTest="./Copy of test"
 
 lstFilesDCM = []  # create an empty list, the raw image data files is stored here
 for dirName, subdirList, fileList in os.walk(PathDicom):
