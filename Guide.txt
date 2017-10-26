@@ -1,0 +1,31 @@
+"""
+A guide to run my algorithm on U_Net :
+
+1- Please download files "sortdata.py", "imageUtil.py", "SimpleTest.py", "util.py", and "unet.py" from the repository 
+2- Install tf_unet from http://tf-unet.readthedocs.io/en/latest/installation.html if the second command while installing did not work, just proceed to next step
+3- Replace unet.py and util.py in tf_unet folder with  unet.py and uti.py you downloaded in step 1 and place all source files in the same path as tf_unet is installed
+4- Modify the following paths in sortdata.py files:
+    PathDicom="./Copy of train/train/DOI"
+    Pathnrrd = "./Copy of train"
+    PathDicomTest="./Copy of test/test/DOI"
+    PathnrrdTest="./Copy of test"
+5- Run sortdata.py you should get 4 numpy arrays saved in the current directory after successfully running this source files
+6- Run SimpleTest.py  : this file trains the U_Net and computes the average true positive of prediction per class label 
+7- After training the network you can restore the network by calling data_provider on Test data as in the following
+    ArrayImageTest=np.load('ImagefiletestCenter1.npy','r+')
+    ArrayLabelTest=np.load('LabelfiletestCenter1.npy','r+')  
+    data_provider = SimpleDataProvider(ArrayImageTest, ArrayLabelTest)
+    net = unet.Unet(channels=data_provider.channels, 
+                n_class=data_provider.n_class, 
+                layers=3, 
+                features_root=64,
+                cost_kwargs=dict(regularizer=0.001),
+                )
+    x_test, y_test = data_provider(1)
+    prediction = net.predict("./unet_trained/model.cpkt", x_test)  
+    labels=np.round(prediction)
+    pyplot.imshow(labels[0,:,:,1]+2*labels[0,:,:,2]) #superimposing labels from each class output
+    pyplot.set_cmap('jet')
+    pyplot.show() 
+
+"""
